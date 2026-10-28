@@ -1,6 +1,8 @@
 from unittest.mock import Mock
+
 import pytest
-from shop.cart import Cart, Item
+
+from shop.cart import Cart
 
 
 # 1. Тест додавання товару
@@ -27,10 +29,10 @@ def test_add_existing_item_with_different_price_keeps_original_price(filled_cart
 @pytest.mark.parametrize(
     ("discount", "expected_total"),
     [
-        (0, 460.0),    # Граничне значення: min discount
+        (0, 460.0),  # Граничне значення: min discount
         (10, 414.0),
         (50, 230.0),
-        (100, 0.0),    # Граничне значення: max discount
+        (100, 0.0),  # Граничне значення: max discount
     ],
 )
 def test_total_with_discounts(filled_cart: Cart, discount: float, expected_total: float) -> None:
@@ -90,6 +92,7 @@ def test_total_in_invalid_rate_raises(filled_cart: Cart) -> None:
 
 
 # --- TDD (Test-Driven Development) для нового методу most_expensive() ---
+
 
 # 16. Перевірка найдорожчого товару (для порожнього кошика й заповненого)
 def test_most_expensive_empty_cart() -> None:
